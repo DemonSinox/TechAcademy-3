@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CenaDAO {
-    private Connection conn;
+    private final Connection conn;
 
     public CenaDAO() throws SQLException {
         this.conn = db.conectar();
@@ -33,6 +33,7 @@ public class CenaDAO {
     public String buscarDescricaoCena(int cenaId) {
         String query = "SELECT descricao FROM cena WHERE id_cena = ?";
         String descricao = null;
+
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, cenaId);
