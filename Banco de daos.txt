@@ -1,0 +1,71 @@
+create database textadventure;
+
+use textadventure;
+
+CREATE TABLE cena (
+    id_cena INT AUTO_INCREMENT PRIMARY KEY,
+    descricao TEXT NOT NULL
+);
+
+CREATE TABLE usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    login VARCHAR(50) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    cena_id_save INT,
+    FOREIGN KEY (cena_id_save) REFERENCES cena(id_cena)
+);
+
+CREATE TABLE itens (
+    id_itens INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT,
+    cena_id_atual INT,
+    cena_id_destino INT,
+    FOREIGN KEY (cena_id_atual) REFERENCES cena(id_cena),
+    FOREIGN KEY (cena_id_destino) REFERENCES cena(id_cena)
+);
+
+CREATE TABLE inventario_jogador (
+    usuario_id INT,
+    item_id INT,
+    PRIMARY KEY (usuario_id, item_id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario),
+    FOREIGN KEY (item_id) REFERENCES itens(id_itens)
+);
+
+
+-- CENAS
+
+INSERT INTO cena (descricao) VALUES
+('Em uma manhã de domingo, no interior, o fazendeiro Joh de LaMango estava cuidando de sua horta de milho. Ele notou pegadas grandes e pés de milho quebrados, o que o deixou estressado. Após colocar armadilhas de uso por toda a fazenda, Joh foi descansar. No entanto, ele foi acordado na madrugada pelo som de galhos se quebrando e barulhos estranhos.');
+
+INSERT INTO cena (descricao) VALUES
+('Na madrugada, o fazendeiro LaMango pegou uma LANTERNA. Ele ouviu barulhos de galhos se quebrando e decidiu investigar sozinho. Quando chegou ao quintal, encontrou Shrek fugindo com um saco cheio de mangas, após ter colhido todas as mangas do único pé de manga da fazenda. LaMango o perseguiu até que Shrek ficou preso em uma armadilha.');
+
+INSERT INTO cena (descricao) VALUES
+('LaMango usou um CADERNO. Ele decidiu interrogá-lo pessoalmente. Shrek permaneceu em silêncio durante todas as tentativas de interrogatório. Depois de vários dias, LaMango desistiu e Shrek foi levado para uma prisão próxima. No entanto, em um domingo, enquanto a maioria dos seguranças estavão fora, Shrek conseguiu fugir e foi visto novamente roubando mangas e milhos. As buscas por Shrek começaram e continuam até os dias de hoje.');
+
+INSERT INTO cena (descricao) VALUES
+('LaMango usou um MAPA. Ele decidiu organizar uma equipe de busca para encontrar Shrek. Após semanas de buscas intensivas, a equipe conseguiu localizar Shrek em uma caverna. Shrek foi finalmente capturado e levado de volta à prisão. Desde então, a fazenda de LaMango ficou em paz, e Shrek foi mantido sob vigilância constante.');
+
+INSERT INTO cena (descricao) VALUES
+('LaMango optou por usar um CONTRATO. Ele tentou negociar com Shrek, oferecendo-lhe um suprimento regular de mangas e milhos em troca de paz. Shrek concordou, e desde então, ele tem sido um visitante regular na fazenda, ajudando a cuidar da horta em troca dos alimentos. A paz foi restaurada e ambos, Shrek e LaMango, mantiveram uma relação de respeito mútuo.');
+
+
+-- ITENS
+
+INSERT INTO itens (nome, descricao, cena_id_atual, cena_id_destino) VALUES
+('Lanterna', 'Ferramenta potente para iluminar e explorar áreas escuras.', 1, 2),
+('Caneta', 'Caneta velha quase falhando.', 1, 3),
+('Caderno', 'Caderno sujo e de capa dura para anotar coisas.', 2, NULL),
+('Mapa', 'Documento detalhado com rotas e locais para coordenar buscas.', 3, 4),
+('Contrato', 'Documento formal que define termos para resolver conflitos pacificamente.', 3, 5);
+
+-- select * from itens i 
+-- select * from cena c 
+-- select * from cena 
+
+
+
+
+
