@@ -2,10 +2,6 @@ create database textadventure;
 
 use textadventure;
 
-CREATE TABLE cena (
-    id_cena INT AUTO_INCREMENT PRIMARY KEY,
-    descricao TEXT NOT NULL
-);
 
 CREATE TABLE usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
@@ -25,6 +21,11 @@ CREATE TABLE itens (
     FOREIGN KEY (cena_id_destino) REFERENCES cena(id_cena)
 );
 
+CREATE TABLE cena (
+    id_cena INT AUTO_INCREMENT PRIMARY KEY,
+    descricao TEXT NOT NULL
+);
+
 CREATE TABLE inventario_jogador (
     usuario_id INT,
     item_id INT,
@@ -32,6 +33,10 @@ CREATE TABLE inventario_jogador (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario),
     FOREIGN KEY (item_id) REFERENCES itens(id_itens)
 );
+
+-- show tables ;
+
+-- Dando seu devidos VALUES
 
 
 -- CENAS
@@ -56,16 +61,13 @@ INSERT INTO cena (descricao) VALUES
 
 INSERT INTO itens (nome, descricao, cena_id_atual, cena_id_destino) VALUES
 ('Lanterna', 'Ferramenta potente para iluminar e explorar áreas escuras.', 1, 2),
-('Caneta', 'Caneta velha quase falhando.', 1, 3),
-('Caderno', 'Caderno sujo e de capa dura para anotar coisas.', 2, NULL),
+('Caderno', 'Caderno sujo e de capa dura para anotar coisas.', 2, 3),
 ('Mapa', 'Documento detalhado com rotas e locais para coordenar buscas.', 3, 4),
 ('Contrato', 'Documento formal que define termos para resolver conflitos pacificamente.', 3, 5);
 
 -- select * from itens i 
 -- select * from cena c 
--- select * from cena 
-
-
+-- select descricao from cena 
 
 
 
